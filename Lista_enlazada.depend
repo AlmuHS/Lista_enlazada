@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1680027557 source:/home/almu/Practica_EDD1/Lista_enlazada/main.cpp
+	<iostream>
+	"include/Lista_enlazada.h"
+
+1680023023 /home/almu/Practica_EDD1/Lista_enlazada/include/Lista_enlazada.h
+
+1680027527 source:/home/almu/Practica_EDD1/Lista_enlazada/src/Lista_enlazada.cpp
+	"../include/Lista_enlazada.h"
+	<cstddef>
+	<iostream>
+
