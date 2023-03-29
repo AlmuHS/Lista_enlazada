@@ -13,6 +13,7 @@ void Lista_enlazada::insertar_inicio(int valor){
     elemento* nuevo = new elemento;
     nuevo->dato = valor;
 
+    //Por si acaso no se ha actualizado el puntero inicial
     if(!this->es_vacia())
         nuevo->siguiente = this->lista_ptr;
     else
@@ -26,10 +27,12 @@ void Lista_enlazada::insertar_final(int valor){
     nuevo->dato = valor;
     nuevo->siguiente = NULL;
 
+    //Si la lista está vacía, el elemento se asigna al puntero inicial
     if(this->es_vacia()){
         this->ultimo = nuevo;
         this->lista_ptr = this->ultimo;
     }
+    //Si no, se asigna al puntero final
     else{
         this->ultimo->siguiente = nuevo;
         this->ultimo = nuevo;
@@ -43,13 +46,22 @@ void Lista_enlazada::insertar_intermedio(int pos, int valor){
         elemento* nuevo = new elemento;
         nuevo->dato = valor;
 
+        //Navegamos hasta el elemento de la posicion anterior a donde queremos insertar
         int i = 0;
         elemento* aux = this->lista_ptr;
+
+        //Debemos comprobar que no nos estemos saliendo de la lista
         while(i < pos-1 && aux->siguiente != NULL){
             aux = aux->siguiente;
             i++;
         }
+
+        /* Reasignamos los punteros */
+
+        //El siguiente del nuevo será el siguiente de su antiguo anterior
         nuevo->siguiente = aux->siguiente;
+
+        //El nuevo siguiente del anterior será el nuevo
         aux->siguiente = nuevo;
     }
 
@@ -59,6 +71,9 @@ void Lista_enlazada::eliminar_inicio(){
     if(!this->es_vacia()){
         this->lista_ptr = this->lista_ptr->siguiente;
     }
+    //Por si accidentalmente se ha quedado sin anular
+    else
+        this->lista_ptr = NULL;
 }
 
 /*TODO*/
@@ -66,21 +81,28 @@ void Lista_enlazada::eliminar_final(){
 
     if(!this->es_vacia()){
 
+        //Solo queda un elemento (el inicio)
         if(this->lista_ptr->siguiente == NULL){
             delete lista_ptr;
             this->lista_ptr = NULL;
             this->ultimo = NULL;
 
         }
+        //En otro caso
         else{
-            elemento* aux = this->lista_ptr;
-            elemento* aux2 = aux;
+            //Navegamos hasta la penultima posicion
+            elemento* aux = this->lista_ptr; //ultima posicion
+            elemento* aux_anterior = aux; //penultima posicion
             while(aux->siguiente != NULL){
-                aux2 = aux;
+                aux_anterior = aux;
                 aux = aux->siguiente;
             }
+
+            //Liberamos la memoria de la ultima posicion
             delete aux;
-            this->ultimo = aux2;
+
+            //Actualizamos el ultimo con el antiguo penultimo
+            this->ultimo = aux_anterior;
             this->ultimo->siguiente = NULL;
         }
 
