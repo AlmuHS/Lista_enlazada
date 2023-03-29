@@ -12,7 +12,11 @@ Lista_enlazada::Lista_enlazada()
 void Lista_enlazada::insertar_inicio(int valor){
     elemento* nuevo = new elemento;
     nuevo->dato = valor;
-    nuevo->siguiente = this->lista_ptr;
+
+    if(!this->es_vacia())
+        nuevo->siguiente = this->lista_ptr;
+    else
+        nuevo->siguiente = NULL;
 
     this->lista_ptr = nuevo;
 }
@@ -27,10 +31,8 @@ void Lista_enlazada::insertar_final(int valor){
         this->lista_ptr = this->ultimo;
     }
     else{
-        this->ultimo->siguiente = NULL;
         this->ultimo->siguiente = nuevo;
         this->ultimo = nuevo;
-        this->ultimo->siguiente = NULL;
     }
 }
 
