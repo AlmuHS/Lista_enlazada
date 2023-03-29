@@ -69,6 +69,13 @@ int main()
     lista.insertar_final(1);
     lista.mostrar();
 
+    std::cout<<"\nInsertando 7 nuevos elementos\n";
+    for(int i = 0; i < 7; i++){
+        lista.insertar_final(i*4);
+    }
+    lista.mostrar();
+
+    std::cout<<"La longitud de la lista es "<<lista.longitud()<<"\n";
 
     return 0;
 }

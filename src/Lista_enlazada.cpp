@@ -161,7 +161,7 @@ int Lista_enlazada::longitud(){
     int longitud = 0;
 
     if(this->lista_ptr != NULL){
-        while(aux->siguiente != NULL){
+        while(aux != NULL){
             aux = aux->siguiente;
             longitud++;
         }
