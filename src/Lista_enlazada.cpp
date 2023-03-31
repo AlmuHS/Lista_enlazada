@@ -85,7 +85,6 @@ void Lista_enlazada::eliminar_inicio(){
         this->lista_ptr = NULL;
 }
 
-/*TODO*/
 void Lista_enlazada::eliminar_final(){
 
     if(!this->es_vacia()){
@@ -128,6 +127,9 @@ void Lista_enlazada::eliminar(int pos){
             elemento *aux2 = aux->siguiente;
             aux->siguiente = aux2->siguiente;
             delete aux2;
+        }
+        else{
+            delete aux;
         }
     }
 
