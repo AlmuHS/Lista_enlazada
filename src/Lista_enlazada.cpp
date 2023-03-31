@@ -58,18 +58,27 @@ void Lista_enlazada::insertar_intermedio(int pos, int valor){
 
         /* Reasignamos los punteros */
 
-        //El siguiente del nuevo será el siguiente de su antiguo anterior
-        nuevo->siguiente = aux->siguiente;
+        if(aux->siguiente != NULL){
+            //El siguiente del nuevo será el siguiente de su antiguo anterior
+            nuevo->siguiente = aux->siguiente;
 
-        //El nuevo siguiente del anterior será el nuevo
-        aux->siguiente = nuevo;
+            //El nuevo siguiente del anterior será el nuevo
+            aux->siguiente = nuevo;
+        }
     }
 
 }
 
 void Lista_enlazada::eliminar_inicio(){
     if(!this->es_vacia()){
-        this->lista_ptr = this->lista_ptr->siguiente;
+        elemento *aux = this->lista_ptr;
+        if(this->lista_ptr->siguiente != NULL){
+            this->lista_ptr = this->lista_ptr->siguiente;
+        }
+        else{
+            this->lista_ptr = NULL;
+        }
+        delete aux;
     }
     //Por si accidentalmente se ha quedado sin anular
     else
@@ -92,17 +101,15 @@ void Lista_enlazada::eliminar_final(){
         else{
             //Navegamos hasta la penultima posicion
             elemento* aux = this->lista_ptr; //ultima posicion
-            elemento* aux_anterior = aux; //penultima posicion
-            while(aux->siguiente != NULL){
-                aux_anterior = aux;
+            while(aux->siguiente != this->ultimo){
                 aux = aux->siguiente;
             }
 
             //Liberamos la memoria de la ultima posicion
-            delete aux;
+            delete this->ultimo;
 
             //Actualizamos el ultimo con el antiguo penultimo
-            this->ultimo = aux_anterior;
+            this->ultimo = aux;
             this->ultimo->siguiente = NULL;
         }
 
@@ -110,7 +117,7 @@ void Lista_enlazada::eliminar_final(){
 }
 
 void Lista_enlazada::eliminar(int pos){
-    if(pos >= 0){
+    if(pos >= 0 && !this->es_vacia()){
         int i = 0;
         elemento* aux = this->lista_ptr;
         while(i < pos-1 && aux->siguiente != NULL){
@@ -153,7 +160,7 @@ int Lista_enlazada::obtener(int pos){
     int i = 0;
     int valor;
 
-    while(i < pos && aux != NULL){
+    while(i < pos && aux->siguiente != NULL){
         aux = aux->siguiente;
         i++;
     }
