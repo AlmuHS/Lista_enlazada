@@ -56,11 +56,11 @@ int main()
     lista.eliminar_final();
     lista.mostrar();
 
-
+    std::cout<<"\nVaciando la lista\n";
     while(!lista.es_vacia()){
         lista.eliminar_final();
         lista.mostrar();
-        std::cout<<"La capacidad de la lista es "<<lista.longitud()<<"\n";
+        std::cout<<"La capacidad de la lista es "<<lista.longitud()<<"\n\n";
     }
     lista.mostrar();
     if(lista.es_vacia()) std::cout<<"La lista está vacía";
@@ -76,6 +76,24 @@ int main()
     lista.mostrar();
 
     std::cout<<"La longitud de la lista es "<<lista.longitud()<<"\n";
+
+    std::cout<<"\nInsertando 4 elementos al inicio\n";
+    for(int i = 0; i < 4; i++){
+        lista.insertar_inicio(i*7);
+    }
+    lista.mostrar();
+
+    std::cout<<"\nEliminando el elemento inicial\n";
+    lista.eliminar_inicio();
+    lista.mostrar();
+
+    std::cout<<"\nVaciando la lista a partir de los elementos iniciales\n";
+    while(!lista.es_vacia()){
+        lista.eliminar_inicio();
+        lista.mostrar();
+    }
+
+    if(lista.es_vacia()) std::cout<<"La lista está vacía\n";
 
     return 0;
 }
